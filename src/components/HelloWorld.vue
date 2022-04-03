@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h3 @click="increment">{{ count }}</h3>
   </div>
 </template>
 
@@ -9,6 +10,23 @@ export default {
   name: "HelloWorld",
   props: {
     msg: String,
+  },
+  computed: {
+    count() {
+      return this.$store.getters.count;
+    },
+    doneTodosCount() {
+      return this.$store.getters.doneTodosCount;
+    },
+  },
+  methods: {
+    increment() {
+      //! Invoke a mutation handler
+      // this.$store.commit("increment", { amount: 10 });
+
+      //! Invoke a action handler
+      this.$store.dispatch("incrementAsync", { amount: 10 });
+    },
   },
 };
 </script>
